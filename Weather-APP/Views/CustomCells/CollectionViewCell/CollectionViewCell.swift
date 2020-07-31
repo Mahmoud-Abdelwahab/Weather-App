@@ -9,7 +9,7 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-     
+    
     var houreWeater : HoureWeather?{
         didSet{
             setUpCell()
@@ -17,27 +17,27 @@ class CollectionViewCell: UICollectionViewCell {
     }
     func  setUpCell() {
         guard let houre = houreWeater else {
-                   print("no data")
-                   return
-               }
+            print("no data")
+            return
+        }
         tempLable.text = "\(houre.temp)°"
         iconeImage.contentMode = .scaleAspectFit
         iconeImage.image = UIImage(named: houre.weather[0].icon)
-              
+        
     }
     @IBOutlet var iconeImage : UIImageView!
     @IBOutlet var tempLable  : UILabel!
     
     static let identifier = "CollectionViewCell"
-      
-      static func nib()-> UINib
-      {
-          return UINib(nibName : "CollectionViewCell" , bundle : nil)
-          
-      }
+    
+    static func nib()-> UINib
+    {
+        return UINib(nibName : "CollectionViewCell" , bundle : nil)
+        
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 }
