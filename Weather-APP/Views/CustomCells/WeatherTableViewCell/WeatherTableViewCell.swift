@@ -25,7 +25,7 @@ class WeatherTableViewCell: UITableViewCell {
             return
         }
         highTemp.text = "\(Int(day.temp.max))°"
-          lowTemp.text = "\(Int(day.temp.min))°"
+        lowTemp.text = "\(Int(day.temp.min))°"
         iconImage.image = UIImage(named: day.weather[0].icon)
         dayLable.text = getDayForDate(Date(timeIntervalSince1970: Double(day.dt)))
     }
@@ -51,10 +51,10 @@ class WeatherTableViewCell: UITableViewCell {
         // Initialization code
         backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

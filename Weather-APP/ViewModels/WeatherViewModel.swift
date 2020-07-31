@@ -8,7 +8,7 @@
 
 import UIKit
 class WeatherViewModel {
-  
+    
     var weather : WeatherResponse?
     
     var dailyWeather : [DayWeather]? {

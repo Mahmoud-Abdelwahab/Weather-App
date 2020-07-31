@@ -30,7 +30,7 @@ class MainVC: UIViewController {
     var models = [Weather]()
     
     lazy var tableHeader : UIView = {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height:  view.frame.size.height/2))
+        let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height:  view.frame.size.height/3))
         header.backgroundColor = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
         
         return header
@@ -46,11 +46,11 @@ class MainVC: UIViewController {
             guard let self = self else{return}
             if status {
                 DispatchQueue.main.async {
-                  
+                    
                     self.weather = self.weatherViewModel.weather
                     self.hourWeather = self.weatherViewModel.hourWeather!
                     self.dailyWeather = self.weatherViewModel.dailyWeather!
-                      self.configurTableHeaderContent()
+                    self.configurTableHeaderContent()
                     self.table.reloadData()
                 }
                 
@@ -81,18 +81,13 @@ class MainVC: UIViewController {
         summaryLable.text = weather.timezone
         summaryLable.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         summaryLable.textAlignment = .center
-        let tempLable     = UILabel(frame: CGRect(x: 10, y: locationLable.frame.size.height/3 + summaryLable.frame.size.height/3, width: view.frame.size.width - 20 , height: view.frame.size.height / 3))
+        let tempLable     = UILabel(frame: CGRect(x: 10, y: locationLable.frame.size.height/3 + summaryLable.frame.size.height/3, width: view.frame.size.width - 20 , height: view.frame.size.height / 4))
         tempLable.text = "\(weather.current.temp)°"
         tempLable.font =  UIFont(name: "Helvetica-Bold", size: 35)
         tempLable.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         tempLable.textAlignment = .center
         tableHeader .addSubview(tempLable)
-        /* NSLayoutConstraint.activate([
-         locationLable.leadingAnchor.constraint(equalTo: tableHeader.leadingAnchor, constant: 10),
-         locationLable.trailingAnchor.constraint(equalTo: tableHeader.trailingAnchor, constant: -10)
-         , locationLable.heightAnchor.constraint(equalToConstant: tableHeader.frame.size.height / 5) ,
-         locationLable.topAnchor.constraint(equalTo: tableHeader.topAnchor, constant: 20)
-         ])*/
+        
     }
     
     func configureTable(){
@@ -182,46 +177,6 @@ extension MainVC : CLLocationManagerDelegate {
         let lat = currentLocation.coordinate.latitude
         weatherViewModel.requestWeatherForLocation(long: long, lat: lat)
         
-        
-        //        let lat = 31.202926
-        // print("the long : ->\(long) and thr latitude is : -> \(lat)")
-        // don't forget to add permission in the plist file : Privacy - Location When In Use Usage Description
-        //        let ureString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(lat)&lon=\(long)&exclude=minutely&appid=a43c524437016983d9ebc51a1b12f8cd"
-        //        let url =  URL(string : ureString )
-        //        //  print(ureString)
-        //        guard  let URL = url  else{return}
-        //        URLSession.shared.dataTask(with: URL) { [weak self] (data, response, error) in
-        //            guard let self = self else{return}
-        //            guard let data = data , error == nil  else{return}
-        //
-        //            var jsonData : WeatherResponse?
-        //
-        //            do{
-        //                jsonData = try JSONDecoder().decode(WeatherResponse.self, from: data)
-        //                print(jsonData!)
-        //                guard let json = jsonData else {return}
-        //                //print(json.timezone )
-        //                print(json.daily[0].temp)
-        //
-        //                self.weather = json
-        //                for  day in json.daily {
-        //                    self.dailyWeather.append(day)
-        //                }
-        //
-        //                for houre in json.hourly{
-        //                    self.hourWeather.append(houre)
-        //                }
-        //                DispatchQueue.main.async {
-        //                    self.configurTableHeaderContent()
-        //                    self.table.reloadData()
-        //
-        //                }
-        //            }
-        //            catch{
-        //                print("Error \(error)")
-        //            }
-        //
-        //        }.resume()
         
     }
 }
